@@ -3,12 +3,13 @@ abstract: 'AjiFry Language (ã¢ã¸ãã©ã¤èª) Translator'
 author:
   - 'moznion <moznion@gmail.com>'
 build_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: 6.63
+  Test::More: 0.98
 configure_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: 6.63
 dynamic_config: 0
 generated_by: 'ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120630'
-license: unknown
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
@@ -19,6 +20,8 @@ no_index:
     - inc
 requires:
   Class::Accessor::Fast: 0.34
-  Test::More: 0
-  version: 0
-version: 0.02
+  perl: 5.010000
+resources:
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/moznion/Acme--AjiFry.git
+version: 0.03

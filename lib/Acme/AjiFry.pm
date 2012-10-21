@@ -9,7 +9,7 @@ use Encode;
 use List::Util;
 use base 'Class::Accessor::Fast';
 
-use version; our $VERSION = '0.03';
+use version; our $VERSION = '0.04';
 
 our %cols;
 our %rows;
@@ -274,21 +274,39 @@ sub _from_ajifry {
 sub translate_to_ajifry {
     my $self       = shift;
     my $raw_string = shift;
-    $raw_string = Encode::decode_utf8($raw_string);
+    my $chomped    = chomp($raw_string);
 
-    return Encode::encode_utf8( $self->_to_ajifry($raw_string) );
+    unless ($raw_string) {
+        return "\n" if $chomped;
+        return '';
+    }
+
+    my $ajifry_word = Encode::encode_utf8(
+        $self->_to_ajifry( Encode::decode_utf8($raw_string) ) );
+    $ajifry_word .= "\n" if $chomped;
+    return $ajifry_word;
 }
 
 sub translate_from_ajifry {
     my $self        = shift;
     my $ajifry_word = shift;
-    $ajifry_word = Encode::decode_utf8($ajifry_word);
+    my $chomped     = chomp($ajifry_word);
 
-    return Encode::encode_utf8( $self->_from_ajifry($ajifry_word) );
+    unless ($ajifry_word) {
+        return "\n" if $chomped;
+        return '';
+    }
+
+    my $translated_word = Encode::encode_utf8(
+        $self->_from_ajifry( Encode::decode_utf8($ajifry_word) ) );
+    $translated_word .= "\n" if $chomped;
+    return $translated_word;
 }
 1;
 
 __END__
+
+=encoding utf8
 
 =head1 NAME
 
@@ -297,7 +315,7 @@ Acme::AjiFry - AjiFry Language (アジフライ語) Translator
 
 =head1 VERSION
 
-This document describes Acme::AjiFry version 0.0.3
+This document describes Acme::AjiFry version 0.0.4
 
 
 =head1 SYNOPSIS
@@ -322,13 +340,16 @@ L<http://ja.uncyclopedia.info/wiki/%E3%82%A2%E3%82%B8%E3%83%95%E3%83%A9%E3%82%A4
 =over
 
 =item new
+
 new is the constructor of this module.
 
 =item translate_from_ajifry
+
 This module needs a AjiFry-Language string as parameter.
 It returns Japanese which was translated from AjiFry-Language.
 
 =item translate_to_ajifry
+
 This module needs a string as parameter.
 It returns AjiFry-Language which was translated from Japanese.
 
@@ -337,6 +358,7 @@ It returns AjiFry-Language which was translated from Japanese.
 =head1 DEPENDENCIES
 
 Perl 5.10.0 or later.
+
 Class::Accessor::Fast 0.34 or later.
 
 =head1 BUGS AND LIMITATIONS

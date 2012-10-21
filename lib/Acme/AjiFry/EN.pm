@@ -106,27 +106,23 @@ sub _from_ajifry {
     my $ajifry_word = shift;
 
     my $translated_word;
-    while (1) {
-        my $unmatch = 0;
-
-        unless ($ajifry_word) {
-            last;
-        }
+    while ($ajifry_word) {
+        my $match = 0;
 
         foreach my $key ( keys %map ) {
             if ( $ajifry_word =~ s/^$map{$key}// ) {
+                $match = 1;
                 if ( $key ~~ 'space' ) {
                     $translated_word .= ' ';
                 }
                 else {
                     $translated_word .= $key;
                 }
-                $unmatch = 1;
                 last;
             }
         }
 
-        unless ($unmatch) {
+        unless ($match) {
             $ajifry_word =~ s/^(.)//;
             $translated_word .= $1;
         }
@@ -138,25 +134,44 @@ sub _from_ajifry {
 sub translate_to_ajifry {
     my $self       = shift;
     my $raw_string = shift;
-    $raw_string = Encode::decode_utf8($raw_string);
+    my $chomped    = chomp($raw_string);
 
-    return Encode::encode_utf8( $self->_to_ajifry($raw_string) );
+    unless ($raw_string) {
+        return "\n" if $chomped;
+        return '';
+    }
+
+    my $ajifry_word = Encode::encode_utf8(
+        $self->_to_ajifry( Encode::decode_utf8($raw_string) ) );
+    $ajifry_word .= "\n" if $chomped;
+    return $ajifry_word;
 }
 
 sub translate_from_ajifry {
     my $self        = shift;
     my $ajifry_word = shift;
-    $ajifry_word = Encode::decode_utf8($ajifry_word);
+    my $chomped     = chomp($ajifry_word);
 
-    return Encode::encode_utf8( $self->_from_ajifry($ajifry_word) );
+    unless ($ajifry_word) {
+        return "\n" if $chomped;
+        return '';
+    }
+
+    my $translated_word = Encode::encode_utf8(
+        $self->_from_ajifry( Encode::decode_utf8($ajifry_word) ) );
+    $translated_word .= "\n" if $chomped;
+    return $translated_word;
 }
 1;
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 Acme::AjiFry::EN - AjiFry Language Translator for English
+
 
 =head1 SYNOPSIS
 
@@ -173,26 +188,32 @@ Acme::AjiFry::EN - AjiFry Language Translator for English
 Acme::AjiFry::EN is the AjiFry-Language translator.
 This module can translate English into AjiFry-Language, and vice versa.
 
+
 =head1 SEE ALSO
 
 L<Acme::AjiFry>.
+
 
 =head1 METHODS
 
 =over
 
 =item new
+
 new is the constructor of this module.
 
 =item translate_from_ajifry
+
 This module needs a AjiFry-Language string as parameter.
 It returns English which was translated from AjiFry-Language.
 
 =item translate_to_ajifry
+
 This module needs a string as parameter.
 It returns AjiFry-Language which was translated from English.
 
 =back
+
 
 =head1 AUTHOR
 

@@ -9,7 +9,7 @@ use Encode;
 use List::Util;
 use base 'Class::Accessor::Fast';
 
-use version; our $VERSION = '0.04';
+use version; our $VERSION = '0.05';
 
 our %cols;
 our %rows;
@@ -315,7 +315,7 @@ Acme::AjiFry - AjiFry Language (アジフライ語) Translator
 
 =head1 VERSION
 
-This document describes Acme::AjiFry version 0.0.4
+This document describes Acme::AjiFry version 0.0.5
 
 
 =head1 SYNOPSIS
@@ -325,7 +325,7 @@ This document describes Acme::AjiFry version 0.0.4
     my $ajifry = Acme::AjiFry->new();
 
     print $ajifry->translate_to_ajifry('おさしみ')."\n"; # outputs => "食えアジフライお刺身食え食えお刺身ドボドボ岡星ドボドボ"
-    print $ajifry->translate_from_ajifry('食えアジフライお刺身食え食えお刺身ドボドボ岡星ドボドボ')."\n"; # outputs => "食えアジフライお刺身食え食えお刺身ドボドボ岡星ドボドボ"
+    print $ajifry->translate_from_ajifry('食えアジフライお刺身食え食えお刺身ドボドボ岡星ドボドボ')."\n"; # outputs => "おさしみ"
 
 
 =head1 DESCRIPTION

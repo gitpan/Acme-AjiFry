@@ -34,6 +34,7 @@
       "runtime" : {
          "requires" : {
             "Class::Accessor::Fast" : "0.34",
+            "Filter::Simple" : "0.84",
             "perl" : "5.010000"
          }
       }
@@ -47,5 +48,5 @@
          "url" : "git://github.com/moznion/Acme--AjiFry.git"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

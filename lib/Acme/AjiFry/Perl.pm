@@ -5,53 +5,37 @@ use strict;
 use utf8;
 
 use Acme::AjiFry::EN;
-use File::Copy;
-use base 'Class::Accessor::Fast';
+use Filter::Simple;
 
-sub _parse_and_translate {
-    my $filename_to_read = shift;
+sub extract_statements_avobe_declaration {
+    open my $frh, '<', $0 or die "Can't open $0: $!";
 
-    my $ajifry = Acme::AjiFry::EN->new();
-    my ( $executable_code, $replace_code );
-    open my $fh_to_read, '<', $filename_to_read or die "$filename_to_read: $!";
-
-    my $after_line_of_using_this_module = 0;
-    foreach my $line (<$fh_to_read>) {
-        if ($after_line_of_using_this_module) {    #translate
-            $replace_code    .= $ajifry->translate_to_ajifry($line);
-            $executable_code .= $ajifry->translate_from_ajifry($line);
-            next;
-        }
-        else {                                     #not translate
-            $replace_code .= $line;
-            if ( $line =~ /^\s*use\s*Acme::AjiFry::Perl/ ) {
-                $after_line_of_using_this_module = 1;
-            }
-            else {
-                $executable_code .= $line;
-            }
-        }
+    my $above_declaration_str;
+    foreach my $line (<$frh>) {
+        $above_declaration_str .= $line;
+        last if ( $line =~ /^\s*use\s*Acme::AjiFry::Perl/ );
     }
+    close $frh;
 
-    close $fh_to_read;
-    return ( $executable_code, $replace_code );
+    return $above_declaration_str;
 }
 
-sub _self_rewrite {
-    my $target_filename = $0;
+my $ajifry = Acme::AjiFry::EN->new();
 
-    my ( $executable_code, $replace_code ) =
-      _parse_and_translate($target_filename);
+FILTER_ONLY all => sub {
+    s/(.+)/$ajifry->translate_to_ajifry($1)/eg;
 
-    open my $fh_to_rewrite, '>', $target_filename
-      or die "$target_filename: $!";
-    print $fh_to_rewrite $replace_code;
-    close $fh_to_rewrite;
+    open my $fh,'+<',"$0" or die "Can't rewrite '$0'\n";
+    seek $fh,0,0;
 
-    eval $executable_code;
-    exit(0);
-}
-_self_rewrite();
+    print $fh &extract_statements_avobe_declaration;
+    print $fh $_;
+
+    s/(.+)/$ajifry->translate_from_ajifry($1)/eg;
+
+    close $fh;
+};
+1;
 
 __END__
 

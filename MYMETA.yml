@@ -20,8 +20,9 @@ no_index:
     - inc
 requires:
   Class::Accessor::Fast: 0.34
+  Filter::Simple: 0.84
   perl: 5.010000
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/moznion/Acme--AjiFry.git
-version: 0.05
+version: 0.06

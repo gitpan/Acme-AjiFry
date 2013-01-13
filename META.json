@@ -1,10 +1,10 @@
 {
-   "abstract" : "AjiFry Language (アジフライ語) Translator",
+   "abstract" : "AjiFry Language (ã¢ã¸ãã©ã¤èª) Translator",
    "author" : [
       "moznion <moznion@gmail.com>"
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.6303, CPAN::Meta::Converter version 2.112621",
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.112150",
    "license" : [
       "perl_5"
    ],
@@ -15,28 +15,48 @@
    "name" : "Acme-AjiFry",
    "no_index" : {
       "directory" : [
-         "t",
          "inc"
       ]
    },
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.63",
+            "Cwd" : 0,
+            "Encode" : "2.39",
+            "File::Basename" : "2.78",
+            "File::Compare" : "1.1006",
+            "File::Copy" : "2.18",
             "Test::More" : "0.98"
          }
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.63"
+            "Module::Build" : "0.40"
          }
       },
       "runtime" : {
          "requires" : {
+            "Carp" : 0,
             "Class::Accessor::Fast" : "0.34",
             "Filter::Simple" : "0.84",
+            "List::Util" : "1.22",
+            "base" : 0,
             "perl" : "5.010000"
          }
+      }
+   },
+   "provides" : {
+      "Acme::AjiFry" : {
+         "file" : "lib/Acme/AjiFry.pm",
+         "version" : "0.08"
+      },
+      "Acme::AjiFry::EN" : {
+         "file" : "lib/Acme/AjiFry/EN.pm",
+         "version" : 0
+      },
+      "Acme::AjiFry::Perl" : {
+         "file" : "lib/Acme/AjiFry/Perl.pm",
+         "version" : 0
       }
    },
    "release_status" : "stable",
@@ -48,5 +68,5 @@
          "url" : "git://github.com/moznion/Acme--AjiFry.git"
       }
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }

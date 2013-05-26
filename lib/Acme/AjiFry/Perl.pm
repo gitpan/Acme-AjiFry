@@ -23,15 +23,15 @@ sub _extract_statements_avobe_declaration {
 my $ajifry = Acme::AjiFry::EN->new();
 
 FILTER_ONLY all => sub {
-    s/(.+)/$ajifry->translate_to_ajifry($1)/eg;
+    s/(.+)/$ajifry->to_AjiFry($1)/eg;
 
-    open my $fh,'+<',"$0" or die "Can't rewrite '$0'\n";
-    seek $fh,0,0;
+    open my $fh, '+<', "$0" or die "Can't rewrite '$0'\n";
+    seek $fh, 0, 0;
 
     print $fh &_extract_statements_avobe_declaration;
     print $fh $_;
 
-    s/(.+)/$ajifry->translate_from_ajifry($1)/eg;
+    s/(.+)/$ajifry->to_English($1)/eg;
 
     close $fh;
 };
@@ -61,7 +61,13 @@ This module rewrites a program of using this module.
 
 =head1 DEPENDENCIES
 
-Acme::AjiFry::EN
+=over 4
+
+=item * Acme::AjiFry::EN
+
+=item * Filter::Simple (version 0.84 or later)
+
+=back
 
 
 =head1 SEE ALSO

@@ -1,13 +1,11 @@
 {
    "abstract" : "AjiFry Language (ã¢ã¸ãã©ã¤èª) Translator",
    "author" : [
-      "moznion <moznion@gmail.com>"
+      "moznion  C<< <moznion[at]gmail.com> >>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.112150",
-   "license" : [
-      "perl_5"
-   ],
+   "generated_by" : "Minilla/v0.4.4",
+   "license" : "perl_5",
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
@@ -15,58 +13,76 @@
    "name" : "Acme-AjiFry",
    "no_index" : {
       "directory" : [
-         "inc"
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author"
       ]
    },
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Cwd" : 0,
-            "Encode" : "2.39",
-            "File::Basename" : "2.78",
-            "File::Compare" : "1.1006",
-            "File::Copy" : "2.18",
+            "File::Compare" : "1.1005",
+            "File::Copy" : "2.13",
+            "File::Spec::Functions" : "0",
+            "FindBin" : "0",
             "Test::More" : "0.98"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.40"
+            "CPAN::Meta" : "0",
+            "CPAN::Meta::Prereqs" : "0",
+            "Module::Build" : "0.4003"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion" : "0.10108",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.7"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "Class::Accessor::Fast" : "0.34",
+            "Encode" : "2.39",
             "Filter::Simple" : "0.84",
             "List::Util" : "1.22",
-            "base" : 0,
-            "perl" : "5.010000"
+            "perl" : "5.008009"
          }
       }
    },
    "provides" : {
       "Acme::AjiFry" : {
          "file" : "lib/Acme/AjiFry.pm",
-         "version" : "0.08"
+         "version" : "0.09"
       },
       "Acme::AjiFry::EN" : {
-         "file" : "lib/Acme/AjiFry/EN.pm",
-         "version" : 0
+         "file" : "lib/Acme/AjiFry/EN.pm"
       },
       "Acme::AjiFry::Perl" : {
-         "file" : "lib/Acme/AjiFry/Perl.pm",
-         "version" : 0
+         "file" : "lib/Acme/AjiFry/Perl.pm"
       }
    },
    "release_status" : "stable",
    "resources" : {
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ],
+      "bugtracker" : {
+         "web" : "https://github.com/moznion/Acme--AjiFry/issues"
+      },
+      "homepage" : "https://github.com/moznion/Acme--AjiFry",
       "repository" : {
-         "url" : "git://github.com/moznion/Acme--AjiFry.git"
+         "url" : "git://github.com/moznion/Acme--AjiFry.git",
+         "web" : "https://github.com/moznion/Acme--AjiFry"
       }
    },
-   "version" : "0.08"
+   "version" : "0.09",
+   "x_contributors" : [
+      "papix <papix2011@gmail.com>",
+      "papix <mail@papix.net>",
+      "moznion <moznion@gmail.com>"
+   ]
 }

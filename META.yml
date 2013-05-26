@@ -1,18 +1,19 @@
 ---
 abstract: 'AjiFry Language (ã¢ã¸ãã©ã¤èª) Translator'
 author:
-  - 'moznion <moznion@gmail.com>'
+  - 'moznion  C<< <moznion[at]gmail.com> >>'
 build_requires:
-  Cwd: 0
-  Encode: 2.39
-  File::Basename: 2.78
-  File::Compare: 1.1006
-  File::Copy: 2.18
+  File::Compare: 1.1005
+  File::Copy: 2.13
+  File::Spec::Functions: 0
+  FindBin: 0
   Test::More: 0.98
 configure_requires:
-  Module::Build: 0.40
+  CPAN::Meta: 0
+  CPAN::Meta::Prereqs: 0
+  Module::Build: 0.4003
 dynamic_config: 0
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Minilla/v0.4.4, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,25 +21,32 @@ meta-spec:
 name: Acme-AjiFry
 no_index:
   directory:
+    - t
+    - xt
     - inc
+    - share
+    - eg
+    - examples
+    - author
 provides:
   Acme::AjiFry:
     file: lib/Acme/AjiFry.pm
-    version: 0.08
+    version: 0.09
   Acme::AjiFry::EN:
     file: lib/Acme/AjiFry/EN.pm
-    version: 0
   Acme::AjiFry::Perl:
     file: lib/Acme/AjiFry/Perl.pm
-    version: 0
 requires:
-  Carp: 0
-  Class::Accessor::Fast: 0.34
+  Encode: 2.39
   Filter::Simple: 0.84
   List::Util: 1.22
-  base: 0
-  perl: 5.010000
+  perl: 5.008009
 resources:
-  license: http://dev.perl.org/licenses/
+  bugtracker: https://github.com/moznion/Acme--AjiFry/issues
+  homepage: https://github.com/moznion/Acme--AjiFry
   repository: git://github.com/moznion/Acme--AjiFry.git
-version: 0.08
+version: 0.09
+x_contributors:
+  - 'papix <papix2011@gmail.com>'
+  - 'papix <mail@papix.net>'
+  - 'moznion <moznion@gmail.com>'
